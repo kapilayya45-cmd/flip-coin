@@ -91,6 +91,15 @@ def dashboard():
 
     coins = data[0]
     last_claim = data[1]
+    c.execute("SELECT coins, last_claim FROM users WHERE username=?", (username,))
+data = c.fetchone()
+
+if data:
+    coins = data[0]
+    last_claim = data[1]
+else:
+    coins = 0
+    last_claim = ""
 
     today = str(date.today())
     bonus = False
