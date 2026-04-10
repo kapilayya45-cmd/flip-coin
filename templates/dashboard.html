@@ -1,0 +1,15 @@
+from datetime import date
+
+today = str(date.today())
+
+c.execute("SELECT coins, last_claim FROM users WHERE username=?", (username,))
+data = c.fetchone()
+
+coins = data[0]
+last_claim = data[1]
+
+if last_claim != today:
+    coins += 200
+    c.execute("UPDATE users SET coins=?, last_claim=? WHERE username=?", (coins, today, username))
+    conn.commit()
+    <p>🎁 Daily bonus applied!</p>
