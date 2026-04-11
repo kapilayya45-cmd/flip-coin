@@ -1,62 +1,21 @@
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        try:
-            username = request.form.get('username')
-            password = request.form.get('password')
-
-            if not username or not password:
-                return "Fill all fields ❌"
-
-            conn = sqlite3.connect('/tmp/users.db')
-            c = conn.cursor()
-
-            c.execute("INSERT INTO users VALUES (?, ?, ?, ?)", (username, password, 1000, ""))
-            conn.commit()
-            conn.close()
-
-            return redirect('/login')
-
-        except Exception as e:
-            return f"Signup Error: {str(e)} ❌"
-
-    return render_template('signup.html')
-    @app.route('/leaderboard')
-    @app.route('/recharge')
-    @app.route('/withdraw', methods=['GET', 'POST'])
-def withdraw():
-    if 'username' not in session:
-        return redirect('/login')
-
-    if request.method == 'POST':
-        amount = request.form.get('amount')
-        upi = request.form.get('upi')
-
-        return f"Withdraw request ₹{amount} sent to {upi} 💸"
-
-    return render_template('withdraw.html')
-def recharge():
-    return "Pay and get coins (Coming Soon 💰)"
-def leaderboard():
-    conn = sqlite3.connect('/tmp/users.db')
-    c = conn.cursor()
-
-    c.execute("SELECT username, coins FROM users ORDER BY coins DESC LIMIT 10")
-    users = c.fetchall()
-
-    conn.close()
-
-    return render_template('leaderboard.html', users=users)
-    @app.route('/recharge', methods=['GET', 'POST'])
+@app.route('/recharge', methods=['GET', 'POST'])
 def recharge():
     if 'username' not in session:
         return redirect('/login')
 
     if request.method == 'POST':
+        username = session['username']
         amount = request.form.get('amount')
         utr = request.form.get('utr')
 
-        # simple message (later DB store చేస్తాం)
-        return f"Recharge request submitted ₹{amount} ✅ (UTR: {utr})"
+        conn = sqlite3.connect('/tmp/users.db')
+        c = conn.cursor()
+
+        c.execute("INSERT INTO recharge (username, amount, utr) VALUES (?, ?, ?)",
+                  (username, amount, utr))
+        conn.commit()
+        conn.close()
+
+        return "Recharge request submitted ✅"
 
     return render_template('recharge.html')
