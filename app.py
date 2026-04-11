@@ -35,3 +35,16 @@ def leaderboard():
     conn.close()
 
     return render_template('leaderboard.html', users=users)
+    @app.route('/recharge', methods=['GET', 'POST'])
+def recharge():
+    if 'username' not in session:
+        return redirect('/login')
+
+    if request.method == 'POST':
+        amount = request.form.get('amount')
+        utr = request.form.get('utr')
+
+        # simple message (later DB store చేస్తాం)
+        return f"Recharge request submitted ₹{amount} ✅ (UTR: {utr})"
+
+    return render_template('recharge.html')
