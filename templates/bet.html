@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coin Flip</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .coin {
+            font-size: 80px;
+            margin: 20px;
+            transition: transform 1s;
+        }
+        .spin {
+            transform: rotateY(720deg);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🪙 Coin Flip</h2>
+
+    <div id="coin" class="coin">🪙</div>
+
+    <form method="POST" onsubmit="spinCoin()">
+        <input type="number" name="amount" placeholder="Enter coins" required><br><br>
+
+        <select name="choice">
+            <option value="heads">Heads</option>
+            <option value="tails">Tails</option>
+        </select><br><br>
+
+        <button type="submit">Flip</button>
+    </form>
+</div>
+
+<script>
+function spinCoin() {
+    document.getElementById("coin").classList.add("spin");
+}
+</script>
+
+</body>
+</html>
