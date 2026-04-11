@@ -25,3 +25,4 @@ ref = request.form.get('ref')
 
 c.execute("INSERT INTO users VALUES (?, ?, ?, ?, ?)", 
           (username, password, 1000, "", ref))
+<input type="text" name="ref" placeholder="Referral (optional)">
