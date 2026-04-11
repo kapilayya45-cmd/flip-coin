@@ -21,3 +21,14 @@ def signup():
             return f"Signup Error: {str(e)} ❌"
 
     return render_template('signup.html')
+    @app.route('/leaderboard')
+def leaderboard():
+    conn = sqlite3.connect('/tmp/users.db')
+    c = conn.cursor()
+
+    c.execute("SELECT username, coins FROM users ORDER BY coins DESC LIMIT 10")
+    users = c.fetchall()
+
+    conn.close()
+
+    return render_template('leaderboard.html', users=users)
