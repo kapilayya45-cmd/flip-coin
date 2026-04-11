@@ -40,3 +40,30 @@ button:hover {
     background: #0072ff;
     transform: scale(1.1);
 }
+body {
+    background: linear-gradient(to right, #0f2027, #2c5364);
+    font-family: Arial;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin-top: 100px;
+    background: rgba(0,0,0,0.5);
+    padding: 30px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+input, select, button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin: 5px;
+}
+
+button {
+    background: #00c6ff;
+    color: white;
+    cursor: pointer;
+}
