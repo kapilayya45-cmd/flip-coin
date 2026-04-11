@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>👨‍💼 Admin Dashboard</h2>
+
+    <h3>💳 Recharge Requests</h3>
+    {% for r in recharge %}
+        <p>{{ r[1] }} - ₹{{ r[2] }} - {{ r[3] }}</p>
+    {% endfor %}
+
+    <h3>💸 Withdraw Requests</h3>
+    {% for w in withdraw %}
+        <p>{{ w[1] }} - ₹{{ w[2] }} - {{ w[3] }}</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>
