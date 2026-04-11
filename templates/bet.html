@@ -3,14 +3,23 @@
 <head>
     <title>Coin Flip</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     <style>
         .coin {
-            font-size: 80px;
+            font-size: 90px;
             margin: 20px;
             transition: transform 1s;
         }
+
         .spin {
-            transform: rotateY(720deg);
+            transform: rotateY(1080deg);
+        }
+
+        .loading {
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #ccc;
         }
     </style>
 </head>
@@ -21,7 +30,7 @@
 
     <div id="coin" class="coin">🪙</div>
 
-    <form method="POST" onsubmit="spinCoin()">
+    <form method="POST" onsubmit="return startGame()">
         <input type="number" name="amount" placeholder="Enter coins" required><br><br>
 
         <select name="choice">
@@ -29,13 +38,31 @@
             <option value="tails">Tails</option>
         </select><br><br>
 
-        <button type="submit">Flip</button>
+        <button id="btn">Flip</button>
     </form>
+
+    <div id="loading" class="loading">Flipping coin... ⏳</div>
 </div>
 
 <script>
-function spinCoin() {
-    document.getElementById("coin").classList.add("spin");
+function startGame() {
+    let coin = document.getElementById("coin");
+    let loading = document.getElementById("loading");
+    let btn = document.getElementById("btn");
+
+    // disable button
+    btn.disabled = true;
+
+    // animation
+    coin.classList.add("spin");
+    loading.style.display = "block";
+
+    // delay submit (real feel)
+    setTimeout(() => {
+        document.forms[0].submit();
+    }, 1200);
+
+    return false; // stop immediate submit
 }
 </script>
 
