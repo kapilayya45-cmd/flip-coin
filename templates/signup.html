@@ -21,3 +21,7 @@
 
 </body>
 </html>
+ref = request.form.get('ref')
+
+c.execute("INSERT INTO users VALUES (?, ?, ?, ?, ?)", 
+          (username, password, 1000, "", ref))
