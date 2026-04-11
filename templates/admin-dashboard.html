@@ -9,26 +9,33 @@
 <div class="container">
     <h2>👨‍💼 Admin Dashboard</h2>
 
+    <!-- 💳 Recharge Requests -->
     <h3>💳 Recharge Requests</h3>
+
     {% for r in recharge %}
-        <p>{{ r[1] }} - ₹{{ r[2] }} - {{ r[3] }}</p>
+    <p>
+        {{ r[1] }} - ₹{{ r[2] }} - {{ r[3] }}
+        <br>
+        <a href="/approve_recharge/{{ r[0] }}">
+            <button>✅ Approve</button>
+        </a>
+    </p>
+    {% else %}
+    <p>No recharge requests</p>
     {% endfor %}
 
+    <!-- 💸 Withdraw Requests -->
     <h3>💸 Withdraw Requests</h3>
+
     {% for w in withdraw %}
-        <p>{{ w[1] }} - ₹{{ w[2] }} - {{ w[3] }}</p>
+    <p>
+        {{ w[1] }} - ₹{{ w[2] }} - {{ w[3] }}
+    </p>
+    {% else %}
+    <p>No withdraw requests</p>
     {% endfor %}
+
 </div>
 
 </body>
 </html>
-<h3>💳 Recharge Requests</h3>
-
-{% for r in recharge %}
-<p>
-    {{ r[1] }} - ₹{{ r[2] }} - {{ r[3] }}
-    <a href="/approve_recharge/{{ r[0] }}">
-        <button>✅ Approve</button>
-    </a>
-</p>
-{% endfor %}
