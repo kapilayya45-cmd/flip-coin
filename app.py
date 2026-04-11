@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import sqlite3
 import random
 from datetime import date
+import os
 
 app = Flask(__name__)
 app.secret_key = 'secret123'
@@ -34,8 +35,8 @@ def home():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
 
         conn = sqlite3.connect('users.db')
         c = conn.cursor()
@@ -56,8 +57,8 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
 
         conn = sqlite3.connect('users.db')
         c = conn.cursor()
@@ -89,17 +90,12 @@ def dashboard():
     c.execute("SELECT coins, last_claim FROM users WHERE username=?", (username,))
     data = c.fetchone()
 
-    coins = data[0]
-    last_claim = data[1]
-    c.execute("SELECT coins, last_claim FROM users WHERE username=?", (username,))
-data = c.fetchone()
-
-if data:
-    coins = data[0]
-    last_claim = data[1]
-else:
-    coins = 0
-    last_claim = ""
+    if data:
+        coins = data[0]
+        last_claim = data[1]
+    else:
+        coins = 0
+        last_claim = ""
 
     today = str(date.today())
     bonus = False
@@ -172,9 +168,7 @@ def logout():
     session.pop('username', None)
     return redirect('/login')
 
-# ▶️ Run
-import os
-
+# ▶️ Render ready run
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
