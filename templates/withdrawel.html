@@ -19,3 +19,24 @@
 
 </body>
 </html>
+@app.route('/withdraw', methods=['GET', 'POST'])
+def withdraw():
+    if 'username' not in session:
+        return redirect('/login')
+
+    if request.method == 'POST':
+        username = session['username']
+        amount = request.form.get('amount')
+        upi = request.form.get('upi')
+
+        conn = sqlite3.connect('/tmp/users.db')
+        c = conn.cursor()
+
+        c.execute("INSERT INTO withdraw (username, amount, upi) VALUES (?, ?, ?)",
+                  (username, amount, upi))
+        conn.commit()
+        conn.close()
+
+        return "Withdraw request submitted 💸"
+
+    return render_template('withdraw.html')
