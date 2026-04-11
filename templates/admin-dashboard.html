@@ -22,3 +22,13 @@
 
 </body>
 </html>
+<h3>💳 Recharge Requests</h3>
+
+{% for r in recharge %}
+<p>
+    {{ r[1] }} - ₹{{ r[2] }} - {{ r[3] }}
+    <a href="/approve_recharge/{{ r[0] }}">
+        <button>✅ Approve</button>
+    </a>
+</p>
+{% endfor %}
