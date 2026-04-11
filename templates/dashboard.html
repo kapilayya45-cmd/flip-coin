@@ -13,3 +13,10 @@ if last_claim != today:
     bonus = True
     c.execute("UPDATE users SET coins=?, last_claim=? WHERE username=?", (coins, today, username))
     conn.commit()
+{% if bonus %}
+<p>🎁 Daily bonus applied!</p>
+{% endif %}
+
+<a href="/recharge">
+    <button>💳 Recharge</button>
+</a>
