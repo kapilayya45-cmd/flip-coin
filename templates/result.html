@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Result</h2>
+
+    <h3>Coin: {{ flip }}</h3>
+
+    {% if result == 'win' %}
+        <h2 style="color:green;">🎉 You WON!</h2>
+    {% else %}
+        <h2 style="color:red;">😢 You LOST!</h2>
+    {% endif %}
+
+    <h3>Coins: {{ coins }}</h3>
+
+    <a href="/bet"><button>Play Again</button></a>
+</div>
+
+</body>
+</html>
