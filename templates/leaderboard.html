@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Leaderboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>🏆 Top Players</h2>
+
+    <table>
+        {% for user in users %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }} coins</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/dashboard"><button>Back</button></a>
+</div>
+
+</body>
+</html>
