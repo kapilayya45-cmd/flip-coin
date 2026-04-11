@@ -22,6 +22,9 @@ def signup():
 
     return render_template('signup.html')
     @app.route('/leaderboard')
+    @app.route('/recharge')
+def recharge():
+    return "Pay and get coins (Coming Soon 💰)"
 def leaderboard():
     conn = sqlite3.connect('/tmp/users.db')
     c = conn.cursor()
