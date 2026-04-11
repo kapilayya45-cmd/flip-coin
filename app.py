@@ -23,6 +23,18 @@ def signup():
     return render_template('signup.html')
     @app.route('/leaderboard')
     @app.route('/recharge')
+    @app.route('/withdraw', methods=['GET', 'POST'])
+def withdraw():
+    if 'username' not in session:
+        return redirect('/login')
+
+    if request.method == 'POST':
+        amount = request.form.get('amount')
+        upi = request.form.get('upi')
+
+        return f"Withdraw request ₹{amount} sent to {upi} 💸"
+
+    return render_template('withdraw.html')
 def recharge():
     return "Pay and get coins (Coming Soon 💰)"
 def leaderboard():
