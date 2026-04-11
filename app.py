@@ -35,7 +35,19 @@ def recharge():
             return f"Error: {str(e)} ❌"
 
     return render_template('recharge.html')
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
 
+        if username == "admin" and password == "1234":
+            session['admin'] = True
+            return redirect('/admin/dashboard')
+        else:
+            return "Invalid admin login ❌"
+
+    return render_template('admin_login.html')
 
 @app.route('/approve_recharge/<int:id>')
 def approve_recharge(id):
