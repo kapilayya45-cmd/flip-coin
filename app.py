@@ -8,7 +8,7 @@ def signup():
             if not username or not password:
                 return "Fill all fields ❌"
 
-            conn = sqlite3.connect('users.db')
+            conn = sqlite3.connect('/tmp/users.db')
             c = conn.cursor()
 
             c.execute("INSERT INTO users VALUES (?, ?, ?, ?)", (username, password, 1000, ""))
